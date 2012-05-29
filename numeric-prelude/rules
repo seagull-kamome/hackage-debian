@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+DEB_CABAL_PACKAGE = numeric-prelude
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/hlibrary.mk
+
+build/haskell-numeric-prelude-utils:: build-ghc-stamp
+binary-fixup/haskell-numeric-prelude-utils::
+	install -m 755 -s -D dist-ghc/build/test-gaussian/test-gaussian debian/haskell-numeric-prelude-utils/usr/bin/test-gaussian || true
+	install -m 755 -s -D dist-ghc/build/testsuite/testsuite debian/haskell-numeric-prelude-utils/usr/bin/testsuite || true
+	install -m 755 -s -D dist-ghc/build/test/test debian/haskell-numeric-prelude-utils/usr/bin/test || true
+
+# How to install an extra file into the documentation package
+#binary-fixup/libghc-numeric-prelude-doc::
+#	echo "Some informative text" > debian/libghc-numeric-prelude-doc/usr/share/doc/libghc-numeric-prelude-doc/AnExtraDocFile

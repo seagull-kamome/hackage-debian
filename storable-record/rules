@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+
+DEB_CABAL_PACKAGE = storable-record
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/hlibrary.mk
+
+build/haskell-storable-record-utils:: build-ghc-stamp
+binary-fixup/haskell-storable-record-utils::
+	install -m 755 -s -D dist-ghc/build/storable-record-speed/storable-record-speed debian/haskell-storable-record-utils/usr/bin/storable-record-speed || true
+
+# How to install an extra file into the documentation package
+#binary-fixup/libghc-storable-record-doc::
+#	echo "Some informative text" > debian/libghc-storable-record-doc/usr/share/doc/libghc-storable-record-doc/AnExtraDocFile
